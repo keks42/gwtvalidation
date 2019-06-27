@@ -1,0 +1,6 @@
+---
+applications:
+- name: validation
+  path: target/Validation-1.0-SNAPSHOT.war
+  routes:
+  - route: validation-42.apps.evans.pal.pivotal.io
