@@ -12,6 +12,7 @@
   <properties>
     <!-- Convenience property to set the GWT version -->
     <gwt.version>HEAD-SNAPSHOT</gwt.version>
+    <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
 
     <!-- Setting maven.compiler.source to something different to 1.8
          needs that you configure the sourceLevel in gwt-maven-plugin since
@@ -24,6 +25,13 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
   </properties>
+
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.6.RELEASE</version>
+  </parent>
 
   <dependencyManagement>
     <dependencies>
@@ -38,6 +46,20 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- Spring -->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring.boot.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate.validator</groupId>
+          <artifactId>hibernate-validator</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
     <!-- GWT -->
     <dependency>
       <groupId>com.google.gwt</groupId>
@@ -62,6 +84,7 @@
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
+      <version>1.0.0.GA</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -119,6 +142,11 @@
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
 
     <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.boot.version}</version>
+      </plugin>
       <!-- GWT Maven Plugin-->
       <plugin>
         <groupId>net.ltgt.gwt.maven</groupId>
